@@ -7,10 +7,6 @@ app.use(express.urlencoded({ extended: true })); //strings and arrays
 app.use(express.json());
 app.use(express.static("public")); //presents your public folder to the front-end
 
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "/public/index.html"))
-);
-
 app.get("/api/reminder", (req, res) => {
     fs.readFile(path.join(__dirname,"/db/db.json"), "utf8", (err, data) => {
         if (err) throw err;
@@ -41,5 +37,9 @@ app.post("/api/form", (req, res) => {
     });
   });
 });
+
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "/public/index.html"))
+);
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
